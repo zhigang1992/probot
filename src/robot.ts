@@ -4,7 +4,7 @@ import {logger} from './logger'
 import {LoggerWithTarget, wrapLogger} from './wrap-logger'
 
   import {EventEmitter} from 'promise-events'
-import {EnhancedGitHubClient as GitHubApi, OctokitWithPagination} from './github'
+import {GitHub, OctokitWithPagination} from './github'
 
 /**
  * The `robot` parameter available to apps
@@ -147,7 +147,7 @@ export class Robot {
    * @private
    */
   public async auth (id?: string, log = this.log) {
-    const github: OctokitWithPagination = GitHubApi({
+    const github: OctokitWithPagination = GitHub({
       baseUrl: process.env.GHE_HOST && `https://${process.env.GHE_HOST}/api/v3`,
       debug: process.env.LOG_LEVEL === 'trace',
       logger: log.child({name: 'github', installation: id})
