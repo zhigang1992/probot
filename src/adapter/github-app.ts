@@ -1,6 +1,7 @@
 import { WebhookEvent } from '@octokit/webhooks'
 import cacheManager from 'cache-manager'
 import jwt from 'jsonwebtoken'
+import { Adapter } from '.'
 import { Context } from '../context'
 import { GitHubAPI } from '../github'
 import { logger } from '../logger'
@@ -12,7 +13,7 @@ function isUnauthenticatedEvent (event: WebhookEvent) {
     (event.name === 'installation' && event.payload.action === 'deleted')
 }
 
-export class GitHubApp {
+export class GitHubApp implements Adapter {
   public log: LoggerWithTarget
   public id: number
   public cert: string

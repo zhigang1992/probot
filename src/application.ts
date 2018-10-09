@@ -3,6 +3,7 @@ import deprecated from 'deprecated-decorator'
 import express from 'express'
 import { EventEmitter } from 'promise-events'
 import { ApplicationFunction } from '.'
+import { Adapter } from './adapter'
 import { GitHubApp } from './adapter/github-app'
 import { Context } from './context'
 import { GitHubAPI } from './github'
@@ -20,7 +21,7 @@ export class Application {
   public catchErrors: boolean
   public log: LoggerWithTarget
 
-  private adapter: GitHubApp
+  private adapter: Adapter
 
   constructor (options?: Options) {
     const opts = options || {} as any
@@ -137,7 +138,7 @@ export class Application {
 
   @deprecated('adapter.jwt', '8.0.0')
   public app (): string {
-    return this.adapter.jwt()
+    return (this.adapter as GitHubApp).jwt()
   }
 
   @deprecated('adapter.auth', '8.0.0')
@@ -147,7 +148,7 @@ export class Application {
 }
 
 export interface Options {
-  adapter: GitHubApp
+  adapter: Adapter
   router?: express.Router
   catchErrors?: boolean
 }
