@@ -9,6 +9,8 @@ import { logger } from './logger'
 import { resolve } from './resolver'
 import { createServer } from './server'
 import { createWebhookProxy } from './webhook-proxy'
+import { findPrivateKey } from './private-key'
+import setupApp from './apps/setup'
 
 // tslint:disable:no-var-requires
 // These needs types
@@ -120,6 +122,24 @@ export class Probot {
 }
 
 export const createProbot = (options: Options) => new Probot(options)
+
+export const run = (appFns: Array<ApplicationFunction>) => {
+  require('dotenv').config()
+
+  const privateKey = findPrivateKey()
+
+  const probot = createProbot({
+    id: Number(process.env.APP_ID),
+    secret: process.env.WEBHOOK_SECRET,
+    cert: (privateKey && privateKey.toString()) || undefined,
+    port: Number(process.env.PORT) || 3000,
+    webhookPath: process.env.WEBHOOK_PATH,
+    webhookProxy: process.env.WEBHOOK_PROXY_URL
+  })
+
+  probot.setup(privateKey ? appFns : [setupApp])
+  probot.start()
+}
 
 export type ApplicationFunction = (app: Application) => void
 
