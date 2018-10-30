@@ -20,9 +20,9 @@ const hint = `please use:
  * @returns Private key
  * @private
  */
-export function findPrivateKey (filepath?: string): Buffer | string | null {
+export function findPrivateKey (filepath?: string): string | null {
   if (filepath) {
-    return fs.readFileSync(filepath)
+    return fs.readFileSync(filepath, 'utf8')
   }
   if (process.env.PRIVATE_KEY) {
     let cert = process.env.PRIVATE_KEY
@@ -43,7 +43,7 @@ export function findPrivateKey (filepath?: string): Buffer | string | null {
   }
   if (process.env.PRIVATE_KEY_PATH) {
     if (fs.existsSync(process.env.PRIVATE_KEY_PATH)) {
-      return fs.readFileSync(process.env.PRIVATE_KEY_PATH)
+      return fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'utf8')
     } else {
       throw new Error(`Private key does not exists at path: ${process.env.PRIVATE_KEY_PATH}. Please check to ensure that the PRIVATE_KEY_PATH is correct.`)
     }
