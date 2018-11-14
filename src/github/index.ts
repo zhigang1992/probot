@@ -15,7 +15,9 @@ export function GitHubAPI (options: Options = {} as any) {
   const octokit = new Octokit(options) as GitHubAPI
 
   addRateLimiting(octokit, options.limiter)
-  addLogging(octokit, options.logger)
+  if (options.logger) {
+    addLogging(octokit, options.logger)
+  }
   addPagination(octokit)
   addGraphQL(octokit)
 
@@ -24,7 +26,7 @@ export function GitHubAPI (options: Options = {} as any) {
 
 export interface Options extends Octokit.Options {
   debug?: boolean
-  logger: Logger
+  logger?: Logger
   limiter?: any
 }
 
