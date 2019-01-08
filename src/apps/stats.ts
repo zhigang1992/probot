@@ -39,10 +39,8 @@ export = async (app: Application): Promise<void> => {
   async function getInstallations (): Promise<Installation[]> {
     const github = await app.auth()
 
-    const req = github.apps.listInstallations({ per_page: 100 })
-    return github.paginate(req, async (response: Promise<AnyResponse>) => {
-      const res = await response
-      return res.data
+    return github.paginate(github.apps.listInstallations.endpoint.merge({ per_page: 100 }), (response: AnyResponse) => {
+      return response.data
     })
   }
 
@@ -58,10 +56,8 @@ export = async (app: Application): Promise<void> => {
 
       const github = await app.auth(installation.id)
 
-      const req = github.apps.listRepos({ per_page: 100 })
-      const repositories: Repository[] = await github.paginate(req, async (response: Promise<AnyResponse>) => {
-        const res = await response
-        return res.data.repositories.filter((repository: Repository) => !repository.private)
+      const repositories: Repository[] = await github.paginate(github.apps.listRepos.endpoint.merge({ per_page: 100 }), (response: AnyResponse) => {
+        return response.data.repositories.filter((repository: Repository) => !repository.private)
       })
 
       account.stars = repositories.reduce((stars, repository) => {
