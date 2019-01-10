@@ -23,7 +23,7 @@ export function GitHubAPI (options: Options = {} as any) {
   const octokit = new ProbotOctokit(Object.assign(options, {
     throttle: {
       onAbuseLimit: (retryAfter: number) => options.logger.warn(`Abuse limit hit, retrying in ${retryAfter} seconds`),
-      onRateLimit: (retryAfter: number) => options.logger.warn(`Abuse limit hit, retrying in ${retryAfter} seconds`)
+      onRateLimit: (retryAfter: number) => options.logger.warn(`Rate limit hit, retrying in ${retryAfter} seconds`)
     }
   })) as GitHubAPI
 
