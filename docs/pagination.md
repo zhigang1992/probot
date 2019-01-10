@@ -39,7 +39,7 @@ module.exports = app => {
 
 ## Early exit
 
-Sometimes it is desirable to stop fetching pages after a certain condition has been satisfied. A second argument, `done`, is provided to the callback and can be used to stop pagination. After `done` is invoked, no additional pages will be fetched, but you still need to return the map
+Sometimes it is desirable to stop fetching pages after a certain condition has been satisfied. A second argument, `done`, is provided to the callback and can be used to stop pagination. After `done` is invoked, no additional pages will be fetched, but you still need to return the mapped value for the current page request.
 
 ```js
 module.exports = app => {
