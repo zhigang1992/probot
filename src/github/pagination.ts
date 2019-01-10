@@ -17,8 +17,8 @@ export function addPagination (octokit: Octokit) {
 const defaultCallback = (response: Octokit.AnyResponse, done?: () => void) => response
 
 async function paginate (octokit: Octokit, octokitPaginate: Octokit.Paginate, ...args: any[]) {
-  // Until we fully deprecate the old paginate method, we need to check if the first argument is a promise
-  // If it's not, we return the old function signature
+  // Until we fully deprecate the old paginate method, we need to check if the
+  // first argument. If it is a promise we return the old function signature
   if (!args[0].then) {
     return octokitPaginate(args[0], args[1], args[2])
   }
@@ -26,8 +26,7 @@ async function paginate (octokit: Octokit, octokitPaginate: Octokit.Paginate, ..
   const responsePromise = args[0]
   const callback = args[1] || defaultCallback
 
-  // TODO: make sure this works
-  // Deprecated since 7.4.0
+  // Deprecated since 8.0.0
   // tslint:disable-next-line:no-console
   console.warn(new Error(`.paginate(promise) is deprecated. Use .paginate(endpointOptions) instead.
 
