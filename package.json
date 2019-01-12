@@ -1,6 +1,9 @@
 {
   "name": "probot",
-  "version": "7.4.0",
+  "version": "8.0.0-octokit-16-preview",
+  "publishConfig": {
+    "tag": "octokit-preview"
+  },
   "description": "🤖 A framework for building GitHub Apps to automate and improve your workflow",
   "repository": "https://github.com/probot/probot",
   "main": "lib/index.js",
