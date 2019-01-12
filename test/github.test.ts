@@ -7,7 +7,11 @@ describe('GitHubAPI', () => {
 
   beforeEach(() => {
     const options: Options = {
-      logger
+      logger,
+      throttle: {
+        // disable throttling, otherwise tests are _slow_
+        enable: false
+      }
     }
 
     github = GitHubAPI(options)
