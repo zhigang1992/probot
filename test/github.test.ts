@@ -10,7 +10,7 @@ describe('GitHubAPI', () => {
       logger,
       throttle: {
         // disable throttling, otherwise tests are _slow_
-        enable: false
+        enabled: false
       }
     }
 
