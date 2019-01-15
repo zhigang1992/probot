@@ -1,8 +1,8 @@
 {
   "name": "probot",
-  "version": "8.0.0-octokit-16-preview",
+  "version": "8.0.0-octokit-16-preview.3",
   "publishConfig": {
-    "tag": "octokit-preview"
+    "tag": "octokit-16-preview"
   },
   "description": "🤖 A framework for building GitHub Apps to automate and improve your workflow",
   "repository": "https://github.com/probot/probot",
@@ -69,7 +69,7 @@
   "dependencies": {
     "@octokit/graphql": "2.0.1",
     "@octokit/plugin-enterprise-compatibility": "^1.0.0",
-    "@octokit/plugin-retry": "^2.1.0",
+    "@octokit/plugin-retry": "^2.1.1",
     "@octokit/plugin-throttling": "^2.2.1",
     "@octokit/rest": "^16.8.0",
     "@octokit/webhooks": "^5.0.2",
